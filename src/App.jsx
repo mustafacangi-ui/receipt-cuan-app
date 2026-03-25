@@ -1,5 +1,4 @@
-export default function App()
-import { useState } from "react";
+import React, { useState } from "react";
 
 const tealDark = "#1a7f7a";
 const teal = "#22a39f";
@@ -42,7 +41,7 @@ const stores = [
   { name: "Big W", color: "#003087", text: "#fff" },
 ];
 
-const receipts = [
+const initialReceipts = [
   { id: 1, store: "Woolworths", date: "24 Mar 2025", amount: "$87.45", points: 87, status: "approved" },
   { id: 2, store: "Coles", date: "22 Mar 2025", amount: "$42.10", points: 42, status: "approved" },
   { id: 3, store: "IKEA", date: "20 Mar 2025", amount: "$210.00", points: 210, status: "pending" },
@@ -57,14 +56,14 @@ const prizes = [
 const tabs = ["Home", "Receipts", "Camera", "Shakes", "Account"];
 const tabIcons = ["🏠", "🧾", "📷", "🎲", "👤"];
 
-export default function ReceiptJarApp() {
+export default function App() {
   const [activeTab, setActiveTab] = useState(0);
   const [shakeResult, setShakeResult] = useState(null);
   const [shaking, setShaking] = useState(false);
   const [points, setPoints] = useState(1590);
   const [draws, setDraws] = useState(36);
   const [shakes, setShakes] = useState(28);
-  const [uploadedReceipts, setUploadedReceipts] = useState(receipts);
+  const [uploadedReceipts, setUploadedReceipts] = useState(initialReceipts);
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [jarFill, setJarFill] = useState(55);
 
@@ -154,7 +153,7 @@ export default function ReceiptJarApp() {
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <span style={{ fontSize: 22 }}>🫙</span>
-              <span style={{ fontWeight: 900, fontSize: 20, letterSpacing: -0.5 }}>receipt<span style={{ color: gold }}>JAR</span></span>
+              <span style={{ fontWeight: 900, fontSize: 20, letterSpacing: -0.5 }}>receipt<span style={{ color: gold }}>CUAN</span></span>
             </div>
             <div style={{ display: "flex", gap: 10 }}>
               <span style={{ fontSize: 20, cursor: "pointer" }}>🔔</span>
@@ -198,7 +197,6 @@ export default function ReceiptJarApp() {
                 <div style={{ fontWeight: 800, fontSize: 14, color: "#b8860b", marginBottom: 8 }}>🏆 Golden Jar Reward</div>
                 <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                   <div style={{ position: "relative", width: 56, height: 64 }}>
-                    {/* Jar SVG */}
                     <svg width="56" height="64" viewBox="0 0 56 64">
                       <rect x="10" y="12" width="36" height="46" rx="8" fill="#f5e070" stroke={gold} strokeWidth="2" />
                       <rect x="8" y="8" width="40" height="10" rx="5" fill={gold} />
@@ -336,13 +334,12 @@ export default function ReceiptJarApp() {
                   ))}
                 </div>
 
-                {/* Jar graphic */}
                 <div className={shaking ? "shake-anim" : ""} style={{ fontSize: 64, marginBottom: 12, cursor: "pointer" }} onClick={handleShake}>
                   🫙
                 </div>
 
                 {shakeResult && (
-                  <div style={{ background: "rgba(255,255,255,0.15)", borderRadius: 14, padding: 12, marginBottom: 12, animation: "none" }}>
+                  <div style={{ background: "rgba(255,255,255,0.15)", borderRadius: 14, padding: 12, marginBottom: 12 }}>
                     <div style={{ fontSize: 24 }}>{shakeResult.icon}</div>
                     <div style={{ fontWeight: 900, fontSize: 18, color: shakeResult.big ? gold : white }}>
                       You won {shakeResult.prize}!
@@ -367,7 +364,6 @@ export default function ReceiptJarApp() {
                 </button>
               </div>
 
-              {/* Earn shakes */}
               <div style={{ background: white, borderRadius: 16, padding: 14, boxShadow: "0 2px 8px #0001" }}>
                 <div style={{ fontWeight: 800, fontSize: 14, color: darkText, marginBottom: 8 }}>Fill jars to earn Shakes</div>
                 <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
@@ -501,7 +497,7 @@ export default function ReceiptJarApp() {
       </div>
 
       {/* Stores marquee outside phone */}
-      <div style={{ marginTop: 20, width: 390, overflow: "hidden" }}>
+      <div style={{ marginTop: 20, width: 390, overflow: "hidden", paddingBottom: 40 }}>
         <div style={{ fontWeight: 700, fontSize: 11, color: "#888", textAlign: "center", marginBottom: 8 }}>ACCEPTED STORES</div>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 6, justifyContent: "center" }}>
           {stores.map((s, i) => (
